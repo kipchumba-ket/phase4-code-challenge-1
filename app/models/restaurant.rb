@@ -1,6 +1,7 @@
 class Restaurant < ApplicationRecord
-    has_many :restaurant_pizzas, dependent: :destroy
-    has_many :pizzas, through: :restaurant_pizzas
-    
     validates :name, presence: true
-end
+    validates :address, presence: true
+    
+    has_many :restaurant_pizzas
+    has_many :pizzas, through: :restaurant_pizzas, dependent: :destroy
+  end
