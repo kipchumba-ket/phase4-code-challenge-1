@@ -1,6 +1,9 @@
 # Models
-# Deployment link
-https://kip.onrender.com
+# Deployment Links
+https://kip.onrender.com/pizzas
+https://kip.onrender.com/restaurants
+
+
 
 You need to create the following relationships:
 
