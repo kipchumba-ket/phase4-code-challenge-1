@@ -384,3 +384,375 @@ Completed 200 OK in 74ms (Views: 46.4ms | ActiveRecord: 0.0ms | Allocations: 665
   [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (40.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateRestaurants (20230319183132)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "restaurants" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "address" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230319183132"]]
+  [1m[36mTRANSACTION (6.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePizzas (20230319183150)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "pizzas" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "ingredients" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230319183150"]]
+  [1m[36mTRANSACTION (10.3ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRestaurantPizzas (20230319183215)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "restaurant_pizzas" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "price" decimal, "restaurant_id" integer NOT NULL, "pizza_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_f279821f06"
+FOREIGN KEY ("restaurant_id")
+  REFERENCES "restaurants" ("id")
+, CONSTRAINT "fk_rails_ab3bb148dc"
+FOREIGN KEY ("pizza_id")
+  REFERENCES "pizzas" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_restaurant_pizzas_on_restaurant_id" ON "restaurant_pizzas" ("restaurant_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "index_restaurant_pizzas_on_pizza_id" ON "restaurant_pizzas" ("pizza_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20230319183215"]]
+  [1m[36mTRANSACTION (8.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-03-21 05:35:09.963997"], ["updated_at", "2023-03-21 05:35:09.963997"]]
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Spice Spoon"], ["address", "5217 Emard Ways, Harveytown, NV 33253"], ["created_at", "2023-03-21 05:35:11.946086"], ["updated_at", "2023-03-21 05:35:11.946086"]]
+  [1m[36mTRANSACTION (13.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.2ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "232 Subs"], ["address", "205 Weimann Village, McLaughlinview, IA 34579"], ["created_at", "2023-03-21 05:35:11.964309"], ["updated_at", "2023-03-21 05:35:11.964309"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "8802 Brasserie"], ["address", "Suite 299 48263 Sybil Roads, Ritchieberg, WA 06782"], ["created_at", "2023-03-21 05:35:11.974386"], ["updated_at", "2023-03-21 05:35:11.974386"]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Spice Cafe"], ["address", "614 Reynolds Trafficway, Colbyberg, IL 00396-1615"], ["created_at", "2023-03-21 05:35:11.984932"], ["updated_at", "2023-03-21 05:35:11.984932"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "MCS King"], ["address", "Apt. 998 12250 Brekke Rest, North Morganside, MD 32607"], ["created_at", "2023-03-21 05:35:11.993861"], ["updated_at", "2023-03-21 05:35:11.993861"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "5825 King"], ["address", "Apt. 404 136 Koepp Port, Reynoldstown, FL 60445-8770"], ["created_at", "2023-03-21 05:35:12.002885"], ["updated_at", "2023-03-21 05:35:12.002885"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Salty Sushi"], ["address", "Apt. 471 43989 Jeana Spurs, Port Kirby, MD 56522-3803"], ["created_at", "2023-03-21 05:35:12.012507"], ["updated_at", "2023-03-21 05:35:12.012507"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "GOO Diner"], ["address", "Apt. 320 74726 Hintz Trace, Keelingmouth, AK 77870"], ["created_at", "2023-03-21 05:35:12.022119"], ["updated_at", "2023-03-21 05:35:12.022119"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Hungry Dragon"], ["address", "Suite 481 618 Terry Valleys, Nubiaberg, NV 77206-8103"], ["created_at", "2023-03-21 05:35:12.031544"], ["updated_at", "2023-03-21 05:35:12.031544"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurant Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurants" ("name", "address", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "7689 Cafe"], ["address", "56101 Sunshine Pike, Howellview, WA 93523-1084"], ["created_at", "2023-03-21 05:35:12.040983"], ["updated_at", "2023-03-21 05:35:12.040983"]]
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pork Belly Buns"], ["ingredients", "Tahini"], ["created_at", "2023-03-21 05:35:12.069615"], ["updated_at", "2023-03-21 05:35:12.069615"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Chilli con Carne"], ["ingredients", "Radish"], ["created_at", "2023-03-21 05:35:12.078873"], ["updated_at", "2023-03-21 05:35:12.078873"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pasta with Tomato and Basil"], ["ingredients", "Enoki Mushrooms"], ["created_at", "2023-03-21 05:35:12.087181"], ["updated_at", "2023-03-21 05:35:12.087181"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tuna Sashimi"], ["ingredients", "Octopus"], ["created_at", "2023-03-21 05:35:12.095173"], ["updated_at", "2023-03-21 05:35:12.095173"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Linguine with Clams"], ["ingredients", "Tuna"], ["created_at", "2023-03-21 05:35:12.103176"], ["updated_at", "2023-03-21 05:35:12.103176"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Fettuccine Alfredo"], ["ingredients", "Sweet Chilli Sauce"], ["created_at", "2023-03-21 05:35:12.111299"], ["updated_at", "2023-03-21 05:35:12.111299"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Vegetable Soup"], ["ingredients", "Cornmeal"], ["created_at", "2023-03-21 05:35:12.119607"], ["updated_at", "2023-03-21 05:35:12.119607"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tuna Sashimi"], ["ingredients", "Feijoa"], ["created_at", "2023-03-21 05:35:12.128378"], ["updated_at", "2023-03-21 05:35:12.128378"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Chicken Fajitas"], ["ingredients", "Annatto Seed"], ["created_at", "2023-03-21 05:35:12.137215"], ["updated_at", "2023-03-21 05:35:12.137215"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pappardelle alla Bolognese"], ["ingredients", "Kiwi Berries"], ["created_at", "2023-03-21 05:35:12.146753"], ["updated_at", "2023-03-21 05:35:12.146753"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Barbecue Ribs"], ["ingredients", "Tapioca Flour"], ["created_at", "2023-03-21 05:35:12.156401"], ["updated_at", "2023-03-21 05:35:12.156401"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Stinky Tofu"], ["ingredients", "Grape Seed Oil"], ["created_at", "2023-03-21 05:35:12.165160"], ["updated_at", "2023-03-21 05:35:12.165160"]]
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tiramisù"], ["ingredients", "Vinegar"], ["created_at", "2023-03-21 05:35:12.174469"], ["updated_at", "2023-03-21 05:35:12.174469"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Linguine with Clams"], ["ingredients", "Purple Carrot"], ["created_at", "2023-03-21 05:35:12.183351"], ["updated_at", "2023-03-21 05:35:12.183351"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Bunny Chow"], ["ingredients", "Cayenne"], ["created_at", "2023-03-21 05:35:12.191674"], ["updated_at", "2023-03-21 05:35:12.191674"]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.5ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Pho"], ["ingredients", "Kenchur"], ["created_at", "2023-03-21 05:35:12.201872"], ["updated_at", "2023-03-21 05:35:12.201872"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "French Fries with Sausages"], ["ingredients", "Jasmine Rice"], ["created_at", "2023-03-21 05:35:12.211237"], ["updated_at", "2023-03-21 05:35:12.211237"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Tiramisù"], ["ingredients", "Asian Noodles"], ["created_at", "2023-03-21 05:35:12.220125"], ["updated_at", "2023-03-21 05:35:12.220125"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Som Tam"], ["ingredients", "Fingerlime"], ["created_at", "2023-03-21 05:35:12.229684"], ["updated_at", "2023-03-21 05:35:12.229684"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "pizzas" ("name", "ingredients", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Cheeseburger"], ["ingredients", "White Wine Vinegar"], ["created_at", "2023-03-21 05:35:12.238004"], ["updated_at", "2023-03-21 05:35:12.238004"]]
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 5.0], ["restaurant_id", 6], ["pizza_id", 16], ["created_at", "2023-03-21 05:35:12.276477"], ["updated_at", "2023-03-21 05:35:12.276477"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 1.0], ["restaurant_id", 10], ["pizza_id", 7], ["created_at", "2023-03-21 05:35:12.288177"], ["updated_at", "2023-03-21 05:35:12.288177"]]
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 11.0], ["restaurant_id", 7], ["pizza_id", 11], ["created_at", "2023-03-21 05:35:12.300062"], ["updated_at", "2023-03-21 05:35:12.300062"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.3ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.5ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 4.0], ["restaurant_id", 9], ["pizza_id", 14], ["created_at", "2023-03-21 05:35:12.311891"], ["updated_at", "2023-03-21 05:35:12.311891"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 10.0], ["restaurant_id", 3], ["pizza_id", 10], ["created_at", "2023-03-21 05:35:12.324383"], ["updated_at", "2023-03-21 05:35:12.324383"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 10.0], ["restaurant_id", 1], ["pizza_id", 19], ["created_at", "2023-03-21 05:35:12.335687"], ["updated_at", "2023-03-21 05:35:12.335687"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 12.0], ["restaurant_id", 9], ["pizza_id", 5], ["created_at", "2023-03-21 05:35:12.347209"], ["updated_at", "2023-03-21 05:35:12.347209"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.6ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 5], ["pizza_id", 17], ["created_at", "2023-03-21 05:35:12.358030"], ["updated_at", "2023-03-21 05:35:12.358030"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 7.0], ["restaurant_id", 10], ["pizza_id", 18], ["created_at", "2023-03-21 05:35:12.369708"], ["updated_at", "2023-03-21 05:35:12.369708"]]
+  [1m[36mTRANSACTION (3.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 7], ["pizza_id", 7], ["created_at", "2023-03-21 05:35:12.379575"], ["updated_at", "2023-03-21 05:35:12.379575"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 3.0], ["restaurant_id", 5], ["pizza_id", 10], ["created_at", "2023-03-21 05:35:12.389909"], ["updated_at", "2023-03-21 05:35:12.389909"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.6ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 10.0], ["restaurant_id", 10], ["pizza_id", 9], ["created_at", "2023-03-21 05:35:12.400257"], ["updated_at", "2023-03-21 05:35:12.400257"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.8ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 9], ["pizza_id", 1], ["created_at", "2023-03-21 05:35:12.412526"], ["updated_at", "2023-03-21 05:35:12.412526"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 8.0], ["restaurant_id", 9], ["pizza_id", 1], ["created_at", "2023-03-21 05:35:12.427146"], ["updated_at", "2023-03-21 05:35:12.427146"]]
+  [1m[36mTRANSACTION (4.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 10.0], ["restaurant_id", 3], ["pizza_id", 14], ["created_at", "2023-03-21 05:35:12.438827"], ["updated_at", "2023-03-21 05:35:12.438827"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 3.0], ["restaurant_id", 8], ["pizza_id", 2], ["created_at", "2023-03-21 05:35:12.449819"], ["updated_at", "2023-03-21 05:35:12.449819"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 8.0], ["restaurant_id", 9], ["pizza_id", 11], ["created_at", "2023-03-21 05:35:12.460858"], ["updated_at", "2023-03-21 05:35:12.460858"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 7.0], ["restaurant_id", 10], ["pizza_id", 12], ["created_at", "2023-03-21 05:35:12.472656"], ["updated_at", "2023-03-21 05:35:12.472656"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.3ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.5ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 10.0], ["restaurant_id", 9], ["pizza_id", 19], ["created_at", "2023-03-21 05:35:12.484609"], ["updated_at", "2023-03-21 05:35:12.484609"]]
+  [1m[36mTRANSACTION (4.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 5.0], ["restaurant_id", 3], ["pizza_id", 19], ["created_at", "2023-03-21 05:35:12.497636"], ["updated_at", "2023-03-21 05:35:12.497636"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 2.0], ["restaurant_id", 5], ["pizza_id", 1], ["created_at", "2023-03-21 05:35:12.508614"], ["updated_at", "2023-03-21 05:35:12.508614"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 8.0], ["restaurant_id", 5], ["pizza_id", 12], ["created_at", "2023-03-21 05:35:12.519431"], ["updated_at", "2023-03-21 05:35:12.519431"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 9], ["pizza_id", 10], ["created_at", "2023-03-21 05:35:12.529606"], ["updated_at", "2023-03-21 05:35:12.529606"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 12.0], ["restaurant_id", 6], ["pizza_id", 11], ["created_at", "2023-03-21 05:35:12.539818"], ["updated_at", "2023-03-21 05:35:12.539818"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 5], ["pizza_id", 4], ["created_at", "2023-03-21 05:35:12.550554"], ["updated_at", "2023-03-21 05:35:12.550554"]]
+  [1m[36mTRANSACTION (4.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 9], ["pizza_id", 14], ["created_at", "2023-03-21 05:35:12.561129"], ["updated_at", "2023-03-21 05:35:12.561129"]]
+  [1m[36mTRANSACTION (4.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 5.0], ["restaurant_id", 10], ["pizza_id", 4], ["created_at", "2023-03-21 05:35:12.572100"], ["updated_at", "2023-03-21 05:35:12.572100"]]
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 5.0], ["restaurant_id", 9], ["pizza_id", 20], ["created_at", "2023-03-21 05:35:12.582084"], ["updated_at", "2023-03-21 05:35:12.582084"]]
+  [1m[36mTRANSACTION (3.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 6], ["pizza_id", 6], ["created_at", "2023-03-21 05:35:12.591959"], ["updated_at", "2023-03-21 05:35:12.591959"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 11.0], ["restaurant_id", 3], ["pizza_id", 20], ["created_at", "2023-03-21 05:35:12.602383"], ["updated_at", "2023-03-21 05:35:12.602383"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 8.0], ["restaurant_id", 5], ["pizza_id", 15], ["created_at", "2023-03-21 05:35:12.612320"], ["updated_at", "2023-03-21 05:35:12.612320"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 2], ["pizza_id", 7], ["created_at", "2023-03-21 05:35:12.624555"], ["updated_at", "2023-03-21 05:35:12.624555"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 4.0], ["restaurant_id", 3], ["pizza_id", 11], ["created_at", "2023-03-21 05:35:12.634999"], ["updated_at", "2023-03-21 05:35:12.634999"]]
+  [1m[36mTRANSACTION (3.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.5ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 3.0], ["restaurant_id", 10], ["pizza_id", 17], ["created_at", "2023-03-21 05:35:12.644577"], ["updated_at", "2023-03-21 05:35:12.644577"]]
+  [1m[36mTRANSACTION (5.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.5ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 4], ["pizza_id", 5], ["created_at", "2023-03-21 05:35:12.656281"], ["updated_at", "2023-03-21 05:35:12.656281"]]
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 11.0], ["restaurant_id", 2], ["pizza_id", 7], ["created_at", "2023-03-21 05:35:12.670224"], ["updated_at", "2023-03-21 05:35:12.670224"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 12.0], ["restaurant_id", 4], ["pizza_id", 6], ["created_at", "2023-03-21 05:35:12.680664"], ["updated_at", "2023-03-21 05:35:12.680664"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.3ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.5ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 12.0], ["restaurant_id", 9], ["pizza_id", 1], ["created_at", "2023-03-21 05:35:12.692897"], ["updated_at", "2023-03-21 05:35:12.692897"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 1], ["pizza_id", 2], ["created_at", "2023-03-21 05:35:12.705100"], ["updated_at", "2023-03-21 05:35:12.705100"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.3ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 8], ["pizza_id", 18], ["created_at", "2023-03-21 05:35:12.717165"], ["updated_at", "2023-03-21 05:35:12.717165"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 2], ["pizza_id", 2], ["created_at", "2023-03-21 05:35:12.728436"], ["updated_at", "2023-03-21 05:35:12.728436"]]
+  [1m[36mTRANSACTION (4.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.3ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.1ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 5], ["pizza_id", 12], ["created_at", "2023-03-21 05:35:12.738699"], ["updated_at", "2023-03-21 05:35:12.738699"]]
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 2], ["pizza_id", 18], ["created_at", "2023-03-21 05:35:12.750314"], ["updated_at", "2023-03-21 05:35:12.750314"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 10.0], ["restaurant_id", 4], ["pizza_id", 18], ["created_at", "2023-03-21 05:35:12.760795"], ["updated_at", "2023-03-21 05:35:12.760795"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 1.0], ["restaurant_id", 1], ["pizza_id", 9], ["created_at", "2023-03-21 05:35:12.771870"], ["updated_at", "2023-03-21 05:35:12.771870"]]
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 9.0], ["restaurant_id", 2], ["pizza_id", 12], ["created_at", "2023-03-21 05:35:12.782772"], ["updated_at", "2023-03-21 05:35:12.782772"]]
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.4ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 6.0], ["restaurant_id", 8], ["pizza_id", 20], ["created_at", "2023-03-21 05:35:12.793848"], ["updated_at", "2023-03-21 05:35:12.793848"]]
+  [1m[36mTRANSACTION (4.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 12.0], ["restaurant_id", 3], ["pizza_id", 13], ["created_at", "2023-03-21 05:35:12.805376"], ["updated_at", "2023-03-21 05:35:12.805376"]]
+  [1m[36mTRANSACTION (4.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 2.0], ["restaurant_id", 4], ["pizza_id", 19], ["created_at", "2023-03-21 05:35:12.816153"], ["updated_at", "2023-03-21 05:35:12.816153"]]
+  [1m[36mTRANSACTION (6.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mRestaurant Load (0.2ms)[0m  [1m[34mSELECT "restaurants".* FROM "restaurants" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mPizza Load (0.2ms)[0m  [1m[34mSELECT "pizzas".* FROM "pizzas" ORDER BY RANDOM() LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mRestaurantPizza Create (0.3ms)[0m  [1m[32mINSERT INTO "restaurant_pizzas" ("price", "restaurant_id", "pizza_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["price", 7.0], ["restaurant_id", 7], ["pizza_id", 4], ["created_at", "2023-03-21 05:35:12.828369"], ["updated_at", "2023-03-21 05:35:12.828369"]]
+  [1m[36mTRANSACTION (4.7ms)[0m  [1m[36mcommit transaction[0m
